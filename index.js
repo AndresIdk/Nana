@@ -10,7 +10,7 @@ const app = express()
 
 // Middlewares
 app.use(express.json()) // Parsear la data a Json
-app.use(morgan('dev')) // Mostrar informacion en consola
+// app.use(morgan('dev')) // Mostrar informacion en consola
 app.use(cors()) // Definir cuales origenes pueden consumir la api
 
 app.get('/', (req, res) => {
