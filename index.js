@@ -1,6 +1,6 @@
 // NPM INSTALL -E //Para instalar version sin actualizaciones
 const express = require('express')
-const morgan = require('morgan')
+// const morgan = require('morgan')
 const cors = require('cors')
 
 //  Data
