@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 // String del Mongo para la conexíon
-const connectionString = process.env.MONGO_DB
+// const connectionString = process.env.MONGO_DB
+const connectionString = 'mongodb+srv://Jaime:AngryJaime19@jaime.y0hvfzz.mongodb.net/Nana' // Para Heroku
 
 // Conexión
 mongoose.connect(connectionString)
