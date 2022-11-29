@@ -28,11 +28,15 @@ app.get('/', (req, res) => {
 })
 
 // Ruta conectada a Mongoose para pedir allcharacters
-app.get('/allcharacters', (req, res) => {
-  NanaCharacter.find({})
-    .then(result => res.send(result).end())
-    . catch(err => console.error(err))
+app.get('/allcharacters', async (req, res) => {
+  // Promesas
+  // NanaCharacter.find({})
+  //   .then(result => res.send(result).end())
+  //   . catch(err => console.error(err))
 
+  // Async - Await
+  const characters = await NanaCharacter.find({})
+  res.json(characters)
   // const characters = Nana()
   // res.json(characters)
 })
@@ -46,7 +50,7 @@ app.get('/character/:band', (req, res, next) => {
   // res.json(singers)
 })
 
-app.post('/insert', (req, res) => {
+app.post('/insert', async (req, res, next) => {
   // Extraer de la URL
   const data = req.body
 
@@ -56,12 +60,20 @@ app.post('/insert', (req, res) => {
     Band: data.Band
   })
 
-  nanaCharacter.save()
-    .then(result => {
-      console.log('Guardado: ' + result)
-      res.send('OK').status(200).end()
-    })
-    .catch(err => console.error('Error: ' + err))
+  // nanaCharacter.save()
+  //   .then(result => {
+  //     console.log('Guardado: ' + result)
+  //     res.send('OK').status(200).end()
+  //   })
+  //   .catch(err => console.error('Error: ' + err))
+
+  // Async - Await
+  try {
+    const saveCharacter = await nanaCharacter.save()
+    res.json(saveCharacter)
+  } catch (err) {
+    next(err)
+  }
 
   // const newCharacters = [...Nana(), newCharacter]
 
@@ -97,6 +109,8 @@ app.use(notfound)
 app.use(handleErrors)
 
 const PORT = process.env.PORT || 3002
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log('Server is running on port 3002')
 })
+
+module.exports = { app, server }

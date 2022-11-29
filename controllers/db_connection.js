@@ -2,7 +2,12 @@ const mongoose = require('mongoose')
 
 // String del Mongo para la conexíon
 // const connectionString = process.env.MONGO_DB
-const connectionString = 'mongodb+srv://Jaime:AngryJaime19@jaime.y0hvfzz.mongodb.net/Nana' // Para Heroku
+
+const { NODE_ENV, MONGO_DB, MONGO_DB_TEST } = process.env
+
+const connectionString = NODE_ENV === 'test' ? MONGO_DB_TEST : MONGO_DB
+// Para hosting
+// const connectionString = 'mongodb+srv://Jaime:AngryJaime19@jaime.y0hvfzz.mongodb.net/Nana' // Para Heroku
 
 // Conexión
 mongoose.connect(connectionString)
